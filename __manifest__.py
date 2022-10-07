@@ -10,7 +10,9 @@
     'website': 'tirop.com',
     'license': 'AGPL-3',
     'depends': [],
-    'data': [],
+    'data': [
+              'patient.xml'
+             ],
     'demo': [],
     'installable': True,
     'application': True,
