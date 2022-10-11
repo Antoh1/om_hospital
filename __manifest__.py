@@ -11,7 +11,8 @@
     'license': 'AGPL-3',
     'depends': [],
     'data': [
-              'patient.xml'
+              'security/ir.model.access.csv',
+              'patient.xml',
              ],
     'demo': [],
     'installable': True,
