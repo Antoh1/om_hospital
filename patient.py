@@ -4,7 +4,7 @@ from odoo import models, fields
 
 class HospitalPatient(models.Model):
     _name = 'hospital.patient'
-    #_rec_name = 'name'
+    _rec_name = 'patient_name'
     _description = 'Patient Record'
 
     patient_name = fields.Char(string='Name', required=True)
