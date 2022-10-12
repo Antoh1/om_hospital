@@ -14,6 +14,7 @@
                 'mail',
                 ],
     'data': [
+              'data/sequence.xml',
               'security/ir.model.access.csv',
               'patient.xml',
              ],
