@@ -9,7 +9,10 @@
     'maintainer': 'Tirop',
     'website': 'tirop.com',
     'license': 'AGPL-3',
-    'depends': [],
+    'depends': [
+                'base_setup',
+                'mail',
+                ],
     'data': [
               'security/ir.model.access.csv',
               'patient.xml',
