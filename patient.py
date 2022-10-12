@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api, _
 
 
 class HospitalPatient(models.Model):
@@ -13,3 +13,12 @@ class HospitalPatient(models.Model):
     patient_age = fields.Integer("Age")
     notes = fields.Text(string="Notes")
     image = fields.Binary(string="Image")
+    name_seq = name = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
+                                  index=True, default=lambda self: _('New'))
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name_seq', _('New')) == _('New'):
+                vals['name_seq'] = self.env['ir.sequence'].next_by_code('hospital.patient.code') or _('New')
+        result = super(HospitalPatient, self).create(vals)
+        return result
