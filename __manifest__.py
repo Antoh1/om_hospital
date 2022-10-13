@@ -10,6 +10,7 @@
     'website': 'tirop.com',
     'license': 'AGPL-3',
     'depends': [
+                'sale',
                 'base_setup',
                 'mail',
                 ],
