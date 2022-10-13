@@ -3,6 +3,12 @@
 from odoo import models, fields, api, _
 
 
+class SaleOrderInherit(models.Model):
+    _inherit = 'sale.order'
+
+    patient_name = fields.Char(string='Patient Name')
+
+
 class HospitalPatient(models.Model):
     _name = 'hospital.patient'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -11,6 +17,7 @@ class HospitalPatient(models.Model):
 
     patient_name = fields.Char(string='Name', required=True)
     patient_age = fields.Integer("Age")
+    gender = fields.Selection([('fe_male', 'Female'), ('male', 'Male')], default="male", string="Gender")
     notes = fields.Text(string="Notes")
     image = fields.Binary(string="Image")
     name_seq = name = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
