@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
-
+from odoo.exceptions import ValidationError
 
 class SaleOrderInherit(models.Model):
     _inherit = 'sale.order'
@@ -16,7 +16,7 @@ class HospitalPatient(models.Model):
     _description = 'Patient Record'
 
     patient_name = fields.Char(string='Name', required=True)
-    patient_age = fields.Integer(string="Age", default=0)
+    patient_age = fields.Integer(string="Age", track_visibility="always") # track field changes on chatter
     gender = fields.Selection([('fe_male', 'Female'), ('male', 'Male')], default="male", string="Gender")
     notes = fields.Text(string="Notes")
     image = fields.Binary(string="Image")
@@ -25,6 +25,14 @@ class HospitalPatient(models.Model):
     name_seq = name = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                                   index=True, default=lambda self: _('New'))
 
+    # validating field input for the HP model
+    @api.constrains('patient_age')
+    def check_age(self):
+        for rec in self:
+            if rec.patient_age <= 6:
+                raise ValidationError('The age is too low refer them to children hospital')
+
+    # computing value for age_group field
     @api.depends('patient_age')
     def set_age_group(self):
         for rec in self:
@@ -34,6 +42,7 @@ class HospitalPatient(models.Model):
                 else:
                     rec.age_group = 'adult'
 
+    # generating sequence for HospitalPatient model
     @api.model
     def create(self, vals):
         if vals.get('name_seq', _('New')) == _('New'):
