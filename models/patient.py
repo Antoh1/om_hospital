@@ -23,7 +23,7 @@ class HospitalPatient(models.Model):
     image = fields.Binary(string="Image")
     age_group = fields.Selection(string="Age Group", selection=[('minor', 'Minor'), ('adult', 'Adult')],
                                  compute='set_age_group')
-    name_seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
+    name = name_seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                                   index=True, default=lambda self: _('New'))
     appointment_count = fields.Integer(string="Appointments", compute="get_appointment_count")
 
