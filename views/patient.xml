@@ -52,6 +52,7 @@
       </field>
     </record>
 
+    <!-- smart button with type action rendering a view -->
     <record id="open_patient_appointments" model="ir.actions.act_window">
         <field name="name">Appointments</field>
         <field name="type">ir.actions.act_window</field>
