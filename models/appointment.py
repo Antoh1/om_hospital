@@ -17,8 +17,29 @@ class HospitalAppointment(models.Model):
         result = super(HospitalAppointment, self).create(vals)
         return result
 
+    @api.multi
     def _set_default_code(self):
         return "The odoo sw is the game changer in the business industry"
+
+    # changing state from draft to confirm
+    def action_confirm(self):
+        for rec in self:
+            rec.state = 'confirm'
+
+    # changing state from confirm to done
+    def action_done(self):
+        for rec in self:
+            rec.state = 'done'
+
+    # changing state from done to cancel
+    def action_cancel(self):
+        for rec in self:
+            rec.state = 'cancel'
+
+    # changing state from cancel to draft
+    def action_draft(self):
+        for rec in self:
+            rec.state = 'draft'
 
     name = fields.Char(string="Appointment ID", required=True, copy=False, readonly=True,
                        index=True, default=lambda self: _('New'))
@@ -26,5 +47,10 @@ class HospitalAppointment(models.Model):
     patient_age = fields.Integer(string="Age", related="patient_id.patient_age")
     notes = fields.Text(string="Notes", default=_set_default_code)
     appointment_date = fields.Date(string="Date")
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirm', 'Confirmed'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled')], string='Status', readonly=True, default='draft')
 
 
