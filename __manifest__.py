@@ -10,13 +10,15 @@
     'website': 'tirop.com',
     'license': 'AGPL-3',
     'depends': [
+                'sale',
                 'base_setup',
                 'mail',
                 ],
     'data': [
               'data/sequence.xml',
               'security/ir.model.access.csv',
-              'patient.xml',
+              'views/patient.xml',
+              'views/appointment.xml',
              ],
     'demo': [],
     'installable': True,
