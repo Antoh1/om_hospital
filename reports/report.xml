@@ -1,70 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-    <data>
-        <!-- template to render patient card report-->
-        <template id="report_patient_card_template">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                            <h1>PATIENT CODE : <t t-esc="doc.name_seq"/></h1>
+    <!-- template to render patient card report-->
+    <template id="report_patient_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1>PATIENT CODE : <t t-esc="doc.name_seq"/></h1>
+                    </div>
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-xs-2" style="margin:auto;"></div>
+                            <center>
+                                <div class="col-xs-8" style="margin:auto;">
+                                    <table class="table table-condensed" style="border:3px solid black !important;">
+                                        <tr>
+                                            <td width="40%">
+                                                <p style="text-align:center; padding-top:10px;">
+                                                    <!--<image t-if="not doc.image" t-att-src="'web/static/src/img/placeholder.png'" height="120" border="1" width="120"/>
+                                                    <image t-if="doc.image" t-att-src="'data:image/png;base64 %s' to_text(doc.image)" height="120" border="1" width="120"/>-->
+                                                </p>
+                                                <p style="text-align:center;">
+                                                    <h2><strong><span t-field="doc.patient_name"/></strong></h2>
+                                                </p>
+                                            </td>
+                                            <td width="60%">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="text-align:right;"><strong>Age: </strong></p>
+                                                            <p style="text-align:right;"><strong>Group: </strong></p>
+                                                            <p style="text-align:right;"><strong>Phn No: </strong></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="text-align:left;padding-left:10px;" t-field="doc.patient_age"/>
+                                                            <p style="text-align:left;padding-left:10px;" t-field="doc.age_group"/>
+                                                            <p style="text-align:left;padding-left:10px;" t-field="doc.appointment_count"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </center>
                         </div>
-                        <div class="page">
-                            <div class="oe_structure"/>
-                            <div class="row">
-                                <div class="col-xs-2" style="margin:auto;"></div>
-                                <center>
-                                    <div class="col-xs-8" style="margin:auto;">
-                                        <table class="table table-condensed" style="border:3px solid black !important;">
-                                            <tr>
-                                                <td width="40%">
-                                                    <p style="text-align:center; padding-top:10px;">
-                                                        <!--<image t-if="not doc.image" t-att-src="'web/static/src/img/placeholder.png'" height="120" border="1" width="120"/>
-                                                        <image t-if="doc.image" t-att-src="'data:image/png;base64 %s' to_text(doc.image)" height="120" border="1" width="120"/>-->
-                                                    </p>
-                                                    <p style="text-align:center;">
-                                                        <h2><strong><span t-field="doc.patient_name"/></strong></h2>
-                                                    </p>
-                                                </td>
-                                                <td width="60%">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <p style="text-align:right;"><strong>Age: </strong></p>
-                                                                <p style="text-align:right;"><strong>Group: </strong></p>
-                                                                <p style="text-align:right;"><strong>Phn No: </strong></p>
-                                                            </td>
-                                                            <td>
-                                                                <p style="text-align:left;padding-left:10px;" t-field="doc.patient_age"/>
-                                                                <p style="text-align:left;padding-left:10px;" t-field="doc.age_group"/>
-                                                                <p style="text-align:left;padding-left:10px;" t-field="doc.appointment_count"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </center>
-                            </div>
-                        </div>
-                    </t>
+                    </div>
                 </t>
             </t>
-        </template>
+        </t>
+    </template>
 
-        <!-- action to generate patient card report-->
-        <record id="report_patient_card" model="ir.actions.report" >
-            <field name="name">Patient Card</field>
-            <field name="model">hospital.patient</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">om_hospital.report_patient_card_template</field>
-            <field name="report_file">om_hospital.report_patient_card_template</field>
-            <field name="print_report_name">'Patient-Card'</field>
-            <field name="binding_model_id" ref="om_hospital.model_hospital_patient"/>
-            <field name="binding_type">report</field>
+    <!-- action to generate patient card report-->
+    <record id="report_patient_card" model="ir.actions.report" >
+        <field name="name">Patient Card</field>
+        <field name="model">hospital.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">om_hospital.report_patient_card_template</field>
+        <field name="report_file">om_hospital.report_patient_card_template</field>
+        <field name="print_report_name">'Patient-Card'</field>
+        <field name="binding_model_id" ref="om_hospital.model_hospital_patient"/>
+        <field name="binding_type">report</field>
 
-        </record>
-    </data>
+    </record>
 </odoo>
