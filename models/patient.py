@@ -17,15 +17,18 @@ class HospitalPatient(models.Model):
     _description = 'Patient Record'
 
     patient_name = fields.Char(string='Name', required=True)
+    doctor_id = fields.Many2one(comodel_name="hospital.doctor", string="Doctor", required=False, )
     patient_age = fields.Integer(string="Age", track_visibility="always")  # track field changes on chatter
+    contact = fields.Char(string="Contact Number")
     gender = fields.Selection([('fe_male', 'Female'), ('male', 'Male')], default="male", string="Gender")
-    notes = fields.Text(string="Notes")
+    notes = fields.Text(string="Registration Notes")
     image = fields.Binary(string="Image")
     age_group = fields.Selection(string="Age Group", selection=[('minor', 'Minor'), ('adult', 'Adult')],
                                  compute='set_age_group')
-    name = name_seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
+    name = name_seq = fields.Char(string='Patient ID', required=True, copy=False, readonly=True,
                                   index=True, default=lambda self: _('New'))
     appointment_count = fields.Integer(string="Appointments", compute="get_appointment_count")
+    active = fields.Boolean('Active', default=True)
 
     # function to assign number of appointments to a field
     def get_appointment_count(self):
