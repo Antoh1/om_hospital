@@ -1,7 +1,7 @@
 
 {
     'name': 'Hospital Management',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': 'Module for managing the Hospital',
     'description': '',
     'category': 'Extra Tools',
