@@ -69,7 +69,12 @@
       <field name="model">hospital.patient</field>
       <field name="arch" type="xml">
           <form string="Patients">
+              <header>
+                  <button class="oe_highlight" type="action" name="%(om_hospital.create_appointment_wizard)d"
+                          string="Create Appointment" context="{'default_patient_id': active_id}"/>
+              </header>
               <sheet>
+                  <field name="image" widget="image" class="oe_avatar"/>
                   <div class="oe_button_box" name="button_box">
                       <button class="oe_stat_button" type="object" name="open_patient_appointments" icon="fa-calendar">
                           <field name="appointment_count" widget="statinfo"/>

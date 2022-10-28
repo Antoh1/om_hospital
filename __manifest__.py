@@ -18,6 +18,7 @@
               'data/sequence.xml',
               'security/security.xml',
               'security/ir.model.access.csv',
+              'wizards/create_appointment.xml',
               'views/patient.xml',
               'views/doctor.xml',
               'views/appointment.xml',
