@@ -18,6 +18,8 @@ class HospitalPatient(models.Model):
 
     patient_name = fields.Char(string='Name', required=True)
     doctor_id = fields.Many2one(comodel_name="hospital.doctor", string="Doctor", required=False, )
+    doctor_gender = fields.Selection(string="Doctor Gender", selection=[('male', 'Male'), ('fe_male', 'Female'), ], )
+    contact = fields.Char(string="Contact No.")
     patient_age = fields.Integer(string="Age", track_visibility="always")  # track field changes on chatter
     gender = fields.Selection([('fe_male', 'Female'), ('male', 'Male')], default="male", string="Gender")
     notes = fields.Text(string="Notes")
@@ -33,6 +35,20 @@ class HospitalPatient(models.Model):
     def get_appointment_count(self):
         count = self.env['hospital.appointment'].search_count([('patient_id', '=', self.id)])
         self.appointment_count = count
+
+    @api.multi
+    def name_get(self):
+        res = []
+        for rec in self:
+            res.append((rec.id, '%s-%s' % (rec.patient_name, rec.name_seq)))
+        return res
+
+    # automatically change doctors gender on patient's form when doctor is selected
+    @api.onchange('doctor_id')
+    def set_doctor_gender(self):
+        for rec in self:
+            if rec.doctor_id:
+                rec.doctor_gender = rec.doctor_id.gender
 
     # returning a form and tree views for individual patient appointments
     @api.multi

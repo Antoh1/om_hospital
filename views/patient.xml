@@ -108,6 +108,12 @@
                       <group>
                           <field name="doctor_id" options='{"no_open": True, "no_create": True, "no_create_edit": True}'/>
                       </group>
+                      <group>
+                          <field name="doctor_gender"/>
+                      </group>
+                      <group>
+                          <field name="contact"/>
+                      </group>
                   </group>
                   <group>
                       <field name="notes"/>
